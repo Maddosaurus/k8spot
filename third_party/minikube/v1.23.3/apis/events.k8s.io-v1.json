@@ -1,13 +1,13 @@
 {
   "kind": "APIResourceList",
   "apiVersion": "v1",
-  "groupVersion": "node.k8s.io/v1beta1",
+  "groupVersion": "events.k8s.io/v1",
   "resources": [
     {
-      "name": "runtimeclasses",
+      "name": "events",
       "singularName": "",
-      "namespaced": false,
-      "kind": "RuntimeClass",
+      "namespaced": true,
+      "kind": "Event",
       "verbs": [
         "create",
         "delete",
@@ -18,7 +18,10 @@
         "update",
         "watch"
       ],
-      "storageVersionHash": "WQTu1GL3T2Q="
+      "shortNames": [
+        "ev"
+      ],
+      "storageVersionHash": "r2yiGXH7wu8="
     }
   ]
 }

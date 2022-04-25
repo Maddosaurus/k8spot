@@ -31,11 +31,12 @@ func APIsHandler(c echo.Context) error {
 func APIsGVKHandler(c echo.Context) error {
 	kind := c.Param("kind")
 	version := c.Param("version")
-	if kind == "node.k8s.io" {
-		return c.JSON(http.StatusOK, *readJson(fmt.Sprintf("apis/%v-%v.json", kind, version)))
+	json := readJson(fmt.Sprintf("apis/%v-%v.json", kind, version))
+	if len(*json) == 0 {
+		c.Logger().Warn(fmt.Sprintf("Found unimplemented object: %v/%v  -  ", kind, version), json)
 	}
+	return c.JSON(http.StatusOK, *json)
 
-	return c.JSON(http.StatusOK, "")
 }
 
 func RuntimeResourceHandler(c echo.Context) error {
