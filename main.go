@@ -16,11 +16,17 @@ import (
 func main() {
 	e := echo.New()
 	e.Logger.SetLevel(log.DEBUG)
-	e.Use(middleware.Logger())
+	//e.Use(middleware.Logger())
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		// Format: "${time_rfc3339_nano}${status}/${method} -> ${uri}\n",
+		Format: "${uri}\n",
+	}))
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
+	e.GET("/apis/:kind/:version", handler.APIsGVKHandler)
 	e.GET("/apis", handler.APIsHandler)
+	e.GET("/api/:version/:resource", handler.RuntimeResourceHandler)
 	e.GET("/*", handler.DefaultHandler)
 
 	go func() {
