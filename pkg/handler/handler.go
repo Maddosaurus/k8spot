@@ -24,6 +24,14 @@ func readJson(name string) *map[string]interface{} {
 	return &data
 }
 
+func APIHandler(c echo.Context) error {
+	return c.JSON(http.StatusOK, *readJson("api.json"))
+}
+
+func APIv1Handler(c echo.Context) error {
+	return c.JSON(http.StatusOK, *readJson("api-v1.json"))
+}
+
 func APIsHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, *readJson("apis.json"))
 }
@@ -47,6 +55,6 @@ func RuntimeResourceHandler(c echo.Context) error {
 
 func DefaultHandler(c echo.Context) error {
 	var data map[string]interface{}
-
+	c.Logger().Warnf("Found unimplemented API call! %v", c.Request().URL)
 	return c.JSON(http.StatusOK, data)
 }

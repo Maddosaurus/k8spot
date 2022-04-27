@@ -13,4 +13,4 @@ do
     outName=$(echo "$relurl" | cut -d / -f 3,4 | tr / -)
     outPath="./third_party/minikube/v1.23.3/apis/${outName}.json"  # FIXME: support other k8s flavors/versions
     curl -sS --cacert ${CACERT} --cert ${CERT_PATH} --key ${KEY_PATH} ${url} -o ${outPath}
-done < "./get_json_files.txt"
+done < "./get_json_files.txt" # FIXME: Add top level jsons (above /apis/)

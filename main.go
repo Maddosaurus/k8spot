@@ -24,8 +24,10 @@ func main() {
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
-	e.GET("/apis/:kind/:version", handler.APIsGVKHandler)
 	e.GET("/apis", handler.APIsHandler)
+	e.GET("/apis/:kind/:version", handler.APIsGVKHandler)
+	e.GET("/api", handler.APIHandler)
+	e.GET("/api/v1", handler.APIv1Handler)
 	e.GET("/api/:version/:resource", handler.RuntimeResourceHandler)
 	e.GET("/*", handler.DefaultHandler)
 
