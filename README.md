@@ -1,4 +1,13 @@
 # k8spot
+WARNING: THIS IS NOT PRODUCTION READY!
+
+## To Dos / Areas of Improvements
+- HTTPS (w/ real certs)
+- More endpoints
+- Autogen for workloads
+    - Try parsing OpenAPI
+- Add more k8s flavors
+
 
 ## Usage
 `go run main.go`

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"net/http"
 	"os"
 	"os/signal"
@@ -10,26 +11,42 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
-	"github.com/maddosaurus/k8spot/pkg/handler"
+	"github.com/maddosaurus/k8spot/pkg/handler/kubelet"
+	"github.com/maddosaurus/k8spot/pkg/handler/minikube"
+)
+
+var (
+	flavorFlag string
 )
 
 func main() {
+	flag.StringVar(&flavorFlag, "flavor", "minikube", "Flavor to run. Currently: minikube|kubelet")
+	flag.Parse()
+
 	e := echo.New()
 	e.Logger.SetLevel(log.DEBUG)
-	//e.Use(middleware.Logger())
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		// Format: "${time_rfc3339_nano}${status}/${method} -> ${uri}\n",
-		Format: "${uri}\n",
+		//Format: "${time_rfc3339_nano}${status}/${method} -> ${uri}\n",
+		Format: "${uri} - ${method}\n",
 	}))
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.GET("/apis", handler.APIsHandler)
-	e.GET("/apis/:kind/:version", handler.APIsGVKHandler)
-	e.GET("/api", handler.APIHandler)
-	e.GET("/api/v1", handler.APIv1Handler)
-	e.GET("/api/:version/:resource", handler.RuntimeResourceHandler)
-	e.GET("/*", handler.DefaultHandler)
+
+	if flavorFlag == "minikube" {
+		e.GET("/apis", minikube.APIsHandler)
+		e.GET("/apis/:kind/:version", minikube.APIsGVKHandler)
+		e.GET("/api", minikube.APIHandler)
+		e.GET("/api/v1", minikube.APIv1Handler)
+		e.GET("/api/:version/:resource", minikube.RuntimeResourceHandler)
+		e.GET("/*", minikube.DefaultHandler)
+	} else if flavorFlag == "kubelet" {
+		// FIXME: Sync the two run modes so they produce coherent output
+		e.GET("/pods", kubelet.PodsHandler)
+		e.GET("/runningpods", kubelet.RunningPodsHandler)
+		e.GET("/configz", kubelet.ConfigzHandler)
+		//e.GET("/healthz", kubelet.HealthzHandler)
+		e.GET("/metrics", kubelet.MetricsHandler)
+		e.GET("/*", kubelet.DefaultHandler)
+		e.POST("/run/:namespace/:pod/:container", kubelet.RunHandler)
+	}
 
 	go func() {
 		if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {

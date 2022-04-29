@@ -1,0 +1,163 @@
+{
+    "kind": "PodList",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "metadata": {
+                "name": "hello-node-59bffcc9fd-dqs4m",
+                "namespace": "default",
+                "uid": "96191995-985f-45a6-a1d2-52e955fdd3b8",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "echoserver",
+                        "image": "sha256:365ec60129c5426b4cf160257c06f6ad062c709e0576c8b3d9a5dcc488f5252d",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "coredns-78fcd69978-wgp4v",
+                "namespace": "kube-system",
+                "uid": "92b3a276-238d-4482-b7a8-b4edc5b37050",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "coredns",
+                        "image": "sha256:8d147537fb7d1ac8895da4d55a5e53621949981e2e6460976dae812f83d84a44",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "etcd-nattoralik",
+                "namespace": "kube-system",
+                "uid": "b2471f97964e9af18f7a5ce9f2505bf3",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "etcd",
+                        "image": "sha256:0048118155842e4c91f0498dd298b8e93dc3aecc7052d9882b76f48e311a76ba",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "kube-apiserver-nattoralik",
+                "namespace": "kube-system",
+                "uid": "9109fc1d6d672cf328933992a5e9f0eb",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "kube-apiserver",
+                        "image": "sha256:e64579b7d8862eff8418d27bf67011e348a5d926fa80494a6475b3dc959777f5",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "kube-router-nr9q4",
+                "namespace": "kube-system",
+                "uid": "7a1aad55-8979-446d-ace9-8961c0757c9f",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": null
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "kube-proxy-lwwzh",
+                "namespace": "kube-system",
+                "uid": "b6781bac-b486-4143-9a0c-ea1475dfdc74",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "kube-proxy",
+                        "image": "sha256:873127efbc8a791d06e85271d9a2ec4c5d58afdf612d490e24fb3ec68e891c8d",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "coredns-78fcd69978-szps7",
+                "namespace": "kube-system",
+                "uid": "2cf0e24c-75f8-45cc-b166-783a974da39c",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "coredns",
+                        "image": "sha256:8d147537fb7d1ac8895da4d55a5e53621949981e2e6460976dae812f83d84a44",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "kube-scheduler-nattoralik",
+                "namespace": "kube-system",
+                "uid": "934b4c892833cdef487eae51ecc32cb2",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "kube-scheduler",
+                        "image": "sha256:b51ddc1014b04295e85be898dac2cd4c053433bfe7e702d7e9d6008f3779609b",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        },
+        {
+            "metadata": {
+                "name": "kube-controller-manager-nattoralik",
+                "namespace": "kube-system",
+                "uid": "06ad09247c7ded9a98d7232586a1771a",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "name": "kube-controller-manager",
+                        "image": "sha256:5425bcbd23c54270d9de028c09634f8e9a014e9351387160c133ccf3a53ab3dc",
+                        "resources": {}
+                    }
+                ]
+            },
+            "status": {}
+        }
+    ]
+}
