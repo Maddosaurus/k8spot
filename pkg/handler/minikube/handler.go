@@ -34,6 +34,10 @@ func APIsGVKHandler(c echo.Context) error {
 
 }
 
+func RootHandler(c echo.Context) error {
+	return c.JSON(http.StatusForbidden, *util.ReadJson(basepath + "root.json"))
+}
+
 func RuntimeResourceHandler(c echo.Context) error {
 	version := c.Param("version")
 	resource := c.Param("resource")

@@ -23,6 +23,7 @@ func main() {
 	flag.StringVar(&flavorFlag, "flavor", "minikube", "Flavor to run. Currently: minikube|kubelet")
 	flag.Parse()
 
+	// FIXME: We need to set additional headers by adding a custom middleware
 	e := echo.New()
 	e.Logger.SetLevel(log.DEBUG)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -31,6 +32,8 @@ func main() {
 	}))
 
 	if flavorFlag == "minikube" {
+		e.GET("/", minikube.RootHandler)
+		e.HEAD("/", minikube.RootHandler)
 		e.GET("/apis", minikube.APIsHandler)
 		e.GET("/apis/:kind/:version", minikube.APIsGVKHandler)
 		e.GET("/api", minikube.APIHandler)
@@ -46,10 +49,14 @@ func main() {
 		e.GET("/metrics", kubelet.MetricsHandler)
 		e.GET("/*", kubelet.DefaultHandler)
 		e.POST("/run/:namespace/:pod/:container", kubelet.RunHandler)
+
 	}
 
+	//FIXME: This should be different for the kubelet
+	//FIXME: HTTPS breaks the kubectl config
 	go func() {
-		if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
+		//if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
+		if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down server")
 		}
 	}()
