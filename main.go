@@ -70,8 +70,7 @@ func main() {
 	//FIXME: This should be different for the kubelet
 	//FIXME: HTTPS breaks the kubectl config
 	go func() {
-		if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
-			//if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
+		if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down server")
 		}
 	}()
