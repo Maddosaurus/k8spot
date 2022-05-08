@@ -4,7 +4,7 @@ WARNING: THIS IS NOT PRODUCTION READY!
 ## To Dos / Areas of Improvements
 - Add client cert fingerprint logging
 - Secure json paths (gate to third_party dir)
-- Spoof x-kubernetes headers
+- Spoof x-kubernetes headers dynamically
 - HTTPS (w/ real certs)
 - More endpoints
 - Autogen for workloads

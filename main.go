@@ -20,13 +20,26 @@ var (
 	flavorFlag string
 )
 
+// Add additional k8s headers
+func K8sHeader(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		c.Response().Header().Set("X-Content-Type-Options", "nosniff")
+		c.Response().Header().Set("X-Kubernetes-Pf-Flowschema-Uid", "cc104973-c107-4c5a-bfb7-f2f010a678cd")
+		c.Response().Header().Set("X-Kubernetes-Pf-Prioritylevel-Uid", "4ee6eada-c507-4632-9ed9-cc837d0acf0b")
+		return next(c)
+	}
+}
+
 func main() {
 	flag.StringVar(&flavorFlag, "flavor", "minikube", "Flavor to run. Currently: minikube|kubelet")
 	flag.Parse()
 
-	// FIXME: We need to set additional headers by adding a custom middleware
 	e := echo.New()
 	e.HideBanner = true
+
+	// Add k8s headers for API Prio & Flow control
+	// https://kubernetes.io/docs/concepts/cluster-administration/flow-control/
+	e.Use(K8sHeader)
 
 	// Set up logging
 	f, err := os.OpenFile("./log/k8spot.json", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -68,7 +81,6 @@ func main() {
 	}
 
 	//FIXME: This should be different for the kubelet
-	//FIXME: HTTPS breaks the kubectl config
 	go func() {
 		if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down server")
