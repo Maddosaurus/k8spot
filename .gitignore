@@ -1,3 +1,8 @@
+# ignore additional folders
+build
+log
+.vscode
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

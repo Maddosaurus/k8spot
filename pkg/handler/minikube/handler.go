@@ -44,6 +44,15 @@ func RuntimeResourceHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, *util.ReadJson(fmt.Sprintf("%v%v-%v.json", basepath, version, resource)))
 }
 
+func NodeHandler(c echo.Context) error {
+	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "v1-nodes.json"))
+}
+
+func PodHandler(c echo.Context) error {
+	//namespace := c.Param("namespace")
+	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "v1-pods.json"))
+}
+
 func DefaultHandler(c echo.Context) error {
 	var data map[string]interface{}
 	c.Logger().Warnf("Found unimplemented minikube API call! %v", c.Request().URL)

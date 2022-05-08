@@ -2,6 +2,8 @@
 WARNING: THIS IS NOT PRODUCTION READY!
 
 ## To Dos / Areas of Improvements
+- Secure json paths (gate to third_party dir)
+- Spoof x-kubernetes headers
 - HTTPS (w/ real certs)
 - More endpoints
 - Autogen for workloads

@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"flag"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -25,10 +26,22 @@ func main() {
 
 	// FIXME: We need to set additional headers by adding a custom middleware
 	e := echo.New()
+	e.HideBanner = true
+
+	// Set up logging
+	f, err := os.OpenFile("./log/k8spot.json", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		panic(fmt.Sprintf("error opening file: %v", err))
+	}
+	defer f.Close()
+
 	e.Logger.SetLevel(log.DEBUG)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		//Format: "${time_rfc3339_nano}${status}/${method} -> ${uri}\n",
-		Format: "${uri} - ${method}\n",
+		//Format: "${uri} - ${method} - ${user_agent} - ${remote_ip}\n",
+		Output: f,
+		Format: `{"time": "${time_rfc3339_nano}","remote_ip":"${remote_ip}", "host":"k8spot",` +
+			`"method":"${method}","uri":"${uri}","user_agent":"${user_agent}",` +
+			`"status":${status},"error":"${error}"}` + "\n",
 	}))
 
 	if flavorFlag == "minikube" {
@@ -39,6 +52,8 @@ func main() {
 		e.GET("/api", minikube.APIHandler)
 		e.GET("/api/v1", minikube.APIv1Handler)
 		e.GET("/api/:version/:resource", minikube.RuntimeResourceHandler)
+		e.GET("/api/v1/nodes", minikube.NodeHandler)
+		e.GET("/api/v1/namespaces/:namespace/pods", minikube.PodHandler)
 		e.GET("/*", minikube.DefaultHandler)
 	} else if flavorFlag == "kubelet" {
 		// FIXME: Sync the two run modes so they produce coherent output
@@ -55,8 +70,8 @@ func main() {
 	//FIXME: This should be different for the kubelet
 	//FIXME: HTTPS breaks the kubectl config
 	go func() {
-		//if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
-		if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
+		if err := e.Start(":8080"); err != nil && err != http.ErrServerClosed {
+			//if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down server")
 		}
 	}()
