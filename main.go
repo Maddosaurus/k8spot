@@ -34,8 +34,15 @@ func main() {
 	flag.StringVar(&flavorFlag, "flavor", "minikube", "Flavor to run. Currently: minikube|kubelet")
 	flag.Parse()
 
+	run_port := os.Getenv("K8SPOT_PORT")
+	if run_port == "" {
+		run_port = "8080"
+	}
+	bind_string := fmt.Sprintf(":%v", run_port)
+
 	e := echo.New()
 	e.HideBanner = true
+	e.HidePort = true
 
 	// Add k8s headers for API Prio & Flow control
 	// https://kubernetes.io/docs/concepts/cluster-administration/flow-control/
@@ -48,7 +55,9 @@ func main() {
 	}
 	defer f.Close()
 
-	e.Logger.SetLevel(log.DEBUG)
+	// Set up the logger object as well as the middleware
+	e.Logger.SetLevel(log.INFO)
+	e.Logger.SetOutput(f)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		//Format: "${uri} - ${method} - ${user_agent} - ${remote_ip}\n",
 		Output: f,
@@ -82,7 +91,7 @@ func main() {
 
 	//FIXME: This should be different for the kubelet
 	go func() {
-		if err := e.StartTLS(":8080", "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
+		if err := e.StartTLS(bind_string, "third_party/cert/apiserver.crt", "third_party/cert/apiserver.key"); err != nil && err != http.ErrServerClosed {
 			e.Logger.Fatal("shutting down server")
 		}
 	}()
