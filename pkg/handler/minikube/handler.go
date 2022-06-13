@@ -35,7 +35,9 @@ func APIsGVKHandler(c echo.Context) error {
 }
 
 func RootHandler(c echo.Context) error {
-	return c.JSON(http.StatusForbidden, *util.ReadJson(basepath + "root.json"))
+	// This is what a secured k8s would return, a 403. When authorized, it will return the paths.
+	//return c.JSON(http.StatusForbidden, *util.ReadJson(basepath + "root.json"))
+	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "paths.json"))
 }
 
 func RuntimeResourceHandler(c echo.Context) error {
