@@ -1,0 +1,381 @@
+{
+  "kind": "EndpointsList",
+  "apiVersion": "v1",
+  "metadata": {
+    "resourceVersion": "6386"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "kubernetes",
+        "namespace": "default",
+        "uid": "80e3ae7f-a9a1-4b63-a29d-f95172e6a162",
+        "resourceVersion": "210",
+        "creationTimestamp": "2022-05-27T18:00:58Z",
+        "labels": {
+          "endpointslice.kubernetes.io/skip-mirror": "true"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-apiserver",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:00:58Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:labels": {
+                  ".": {},
+                  "f:endpointslice.kubernetes.io/skip-mirror": {}
+                }
+              },
+              "f:subsets": {}
+            }
+          }
+        ]
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "192.168.49.2"
+            }
+          ],
+          "ports": [
+            {
+              "name": "https",
+              "port": 8443,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "k8s.io-minikube-hostpath",
+        "namespace": "kube-system",
+        "uid": "ea17a737-fa65-4bbf-a80e-d680d7b5003e",
+        "resourceVersion": "6386",
+        "creationTimestamp": "2022-05-27T18:01:44Z",
+        "labels": {
+          "addonmanager.kubernetes.io/mode": "Reconcile"
+        },
+        "annotations": {
+          "control-plane.alpha.kubernetes.io/leader": "{\"holderIdentity\":\"minikube_74c7a468-5046-408d-8045-a429de67a383\",\"leaseDurationSeconds\":15,\"acquireTime\":\"2022-06-16T15:23:20Z\",\"renewTime\":\"2022-06-16T15:36:08Z\",\"leaderTransitions\":5}",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Endpoints\",\"metadata\":{\"annotations\":{},\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\"},\"name\":\"k8s.io-minikube-hostpath\",\"namespace\":\"kube-system\"}}\n"
+        },
+        "managedFields": [
+          {
+            "manager": "storage-provisioner",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:01:44Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:control-plane.alpha.kubernetes.io/leader": {}
+                }
+              }
+            }
+          },
+          {
+            "manager": "kubectl-client-side-apply",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-06-12T05:43:11Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:addonmanager.kubernetes.io/mode": {}
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "kube-dns",
+        "namespace": "kube-system",
+        "uid": "c69b893a-3876-4fa9-a6f9-9b49db3a8724",
+        "resourceVersion": "5839",
+        "creationTimestamp": "2022-05-27T18:01:12Z",
+        "labels": {
+          "k8s-app": "kube-dns",
+          "kubernetes.io/cluster-service": "true",
+          "kubernetes.io/name": "CoreDNS"
+        },
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2022-06-16T15:22:53Z"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:01:13Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:endpoints.kubernetes.io/last-change-trigger-time": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:k8s-app": {},
+                  "f:kubernetes.io/cluster-service": {},
+                  "f:kubernetes.io/name": {}
+                }
+              },
+              "f:subsets": {}
+            }
+          }
+        ]
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "172.17.0.2",
+              "nodeName": "minikube",
+              "targetRef": {
+                "kind": "Pod",
+                "namespace": "kube-system",
+                "name": "coredns-64897985d-ps6vk",
+                "uid": "a8c15350-5a8b-4b88-a084-ec424a8e3565",
+                "resourceVersion": "5836"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "dns-tcp",
+              "port": 53,
+              "protocol": "TCP"
+            },
+            {
+              "name": "dns",
+              "port": 53,
+              "protocol": "UDP"
+            },
+            {
+              "name": "metrics",
+              "port": 9153,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "kube-state-metrics",
+        "namespace": "lens-metrics",
+        "uid": "c09f002b-8610-448e-b518-9e247e1d6c22",
+        "resourceVersion": "5820",
+        "creationTimestamp": "2022-05-27T18:19:44Z",
+        "labels": {
+          "app.kubernetes.io/created-by": "resource-stack",
+          "app.kubernetes.io/managed-by": "Lens",
+          "app.kubernetes.io/name": "lens-metrics",
+          "name": "kube-state-metrics"
+        },
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2022-06-16T15:22:31Z"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:19:54Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:endpoints.kubernetes.io/last-change-trigger-time": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/created-by": {},
+                  "f:app.kubernetes.io/managed-by": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:name": {}
+                }
+              },
+              "f:subsets": {}
+            }
+          }
+        ]
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "172.17.0.4",
+              "nodeName": "minikube",
+              "targetRef": {
+                "kind": "Pod",
+                "namespace": "lens-metrics",
+                "name": "kube-state-metrics-95ccdf888-jkh4t",
+                "uid": "e4828012-06b2-4461-b24a-df01bb53b5b3",
+                "resourceVersion": "5819"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "metrics",
+              "port": 8080,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "node-exporter",
+        "namespace": "lens-metrics",
+        "uid": "2490ed95-3008-4d12-bb63-9d919ef62427",
+        "resourceVersion": "5799",
+        "creationTimestamp": "2022-05-27T18:19:44Z",
+        "labels": {
+          "app.kubernetes.io/created-by": "resource-stack",
+          "app.kubernetes.io/managed-by": "Lens",
+          "app.kubernetes.io/name": "lens-metrics",
+          "service.kubernetes.io/headless": ""
+        },
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2022-05-27T18:19:44Z"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:19:46Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:endpoints.kubernetes.io/last-change-trigger-time": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/created-by": {},
+                  "f:app.kubernetes.io/managed-by": {},
+                  "f:app.kubernetes.io/name": {},
+                  "f:service.kubernetes.io/headless": {}
+                }
+              },
+              "f:subsets": {}
+            }
+          }
+        ]
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "172.17.0.3",
+              "nodeName": "minikube",
+              "targetRef": {
+                "kind": "Pod",
+                "namespace": "lens-metrics",
+                "name": "node-exporter-nx4ps",
+                "uid": "03d111bc-0efd-471d-99bd-c3f4bdb77d31",
+                "resourceVersion": "5762"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "metrics",
+              "port": 9100,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "name": "prometheus",
+        "namespace": "lens-metrics",
+        "uid": "9017e8e0-a816-403d-89b8-a02bff34f9b6",
+        "resourceVersion": "5828",
+        "creationTimestamp": "2022-05-27T18:19:44Z",
+        "labels": {
+          "app.kubernetes.io/created-by": "resource-stack",
+          "app.kubernetes.io/managed-by": "Lens",
+          "app.kubernetes.io/name": "lens-metrics"
+        },
+        "annotations": {
+          "endpoints.kubernetes.io/last-change-trigger-time": "2022-06-16T15:22:37Z"
+        },
+        "managedFields": [
+          {
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "apiVersion": "v1",
+            "time": "2022-05-27T18:19:48Z",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:endpoints.kubernetes.io/last-change-trigger-time": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:app.kubernetes.io/created-by": {},
+                  "f:app.kubernetes.io/managed-by": {},
+                  "f:app.kubernetes.io/name": {}
+                }
+              },
+              "f:subsets": {}
+            }
+          }
+        ]
+      },
+      "subsets": [
+        {
+          "addresses": [
+            {
+              "ip": "172.17.0.5",
+              "hostname": "prometheus-0",
+              "nodeName": "minikube",
+              "targetRef": {
+                "kind": "Pod",
+                "namespace": "lens-metrics",
+                "name": "prometheus-0",
+                "uid": "e85e5c38-c2f4-472d-ad11-9738382699c7",
+                "resourceVersion": "5827"
+              }
+            }
+          ],
+          "ports": [
+            {
+              "name": "web",
+              "port": 9090,
+              "protocol": "TCP"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

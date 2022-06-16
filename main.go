@@ -73,9 +73,10 @@ func main() {
 		e.GET("/apis/:kind/:version", minikube.APIsGVKHandler)
 		e.GET("/api", minikube.APIHandler)
 		e.GET("/api/v1", minikube.APIv1Handler)
-		e.GET("/api/:version/:resource", minikube.RuntimeResourceHandler)
 		e.GET("/api/v1/nodes", minikube.NodeHandler)
+		e.GET("/api/v1/endpoints", minikube.APIv1EndpointsHandler)
 		e.GET("/api/v1/namespaces/:namespace/pods", minikube.PodHandler)
+		e.GET("/api/:version/:resource", minikube.RuntimeResourceHandler)
 		e.GET("/*", minikube.DefaultHandler)
 	} else if flavorFlag == "kubelet" {
 		// FIXME: Sync the two run modes so they produce coherent output

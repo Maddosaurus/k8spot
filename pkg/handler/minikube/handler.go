@@ -23,6 +23,10 @@ func APIsHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "apis.json"))
 }
 
+func APIv1EndpointsHandler(c echo.Context) error {
+	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "v1-endpoints.json"))
+}
+
 func APIsGVKHandler(c echo.Context) error {
 	kind := c.Param("kind")
 	version := c.Param("version")
