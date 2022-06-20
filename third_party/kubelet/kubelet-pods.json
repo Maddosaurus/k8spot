@@ -5,8 +5,8 @@
     "items": [
         {
             "metadata": {
-                "name": "lookItsCoreDNS-00333111-0xBEEF",
-                "generateName": "coredns-0xbeeef0x-",
+                "name": "coredns-64897985d-zfzvr",
+                "generateName": "coredns-64897985d-",
                 "namespace": "el-kube-system",
                 "uid": "2cf0e24c-75f8-45cc-b166-783a974da39c",
                 "resourceVersion": "429",
@@ -23,7 +23,7 @@
                     {
                         "apiVersion": "apps/v1",
                         "kind": "ReplicaSet",
-                        "name": "coredns-0xbeeef0x",
+                        "name": "coredns-64897985d",
                         "uid": "0c53a0a3-bbc2-4387-a8af-2c290f6186bd",
                         "controller": true,
                         "blockOwnerDeletion": true
@@ -225,7 +225,7 @@
                 ],
                 "containers": [
                     {
-                        "name": "coredns-honey",
+                        "name": "coredns",
                         "image": "k8s.gcr.io/coredns/coredns:v1.8.4",
                         "args": [
                             "-conf",

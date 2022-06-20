@@ -70,6 +70,7 @@ func main() {
 		e.GET("/", minikube.RootHandler)
 		e.HEAD("/", minikube.RootHandler)
 		e.GET("/apis", minikube.APIsHandler)
+		e.GET("apis/rbac.authorization.k8s.io", minikube.APIsRBACHandler)
 		e.GET("/apis/:kind/:version", minikube.APIsGVKHandler)
 		e.GET("/api", minikube.APIHandler)
 		e.GET("/api/v1", minikube.APIv1Handler)

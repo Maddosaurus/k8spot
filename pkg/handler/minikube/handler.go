@@ -27,6 +27,10 @@ func APIv1EndpointsHandler(c echo.Context) error {
 	return c.JSON(http.StatusOK, *util.ReadJson(basepath + "v1-endpoints.json"))
 }
 
+func APIsRBACHandler(c echo.Context) error {
+	return c.JSON(http.StatusOK, *util.ReadJson(fmt.Sprintf("%vapis/rbac.authorization.k8s.io-v1.json", basepath)))
+}
+
 func APIsGVKHandler(c echo.Context) error {
 	kind := c.Param("kind")
 	version := c.Param("version")
