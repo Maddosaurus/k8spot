@@ -1,6 +1,9 @@
 # k8spot
 WARNING: THIS IS NOT PRODUCTION READY!
 
+## Talk
+- k8spot has been featured at Troopers 22 (see troopers-22.pdf for the slides)
+
 ## To Dos / Areas of Improvements
 - Add client cert fingerprint logging
 - Secure json paths (gate to third_party dir)
